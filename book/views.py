@@ -20,13 +20,15 @@ def book(request, book_id):
 def chapter(request, chapter_id):
     '''章节里面内容'''
     chapter = Chapter.objects.get(id=chapter_id)
+    book = chapter.book
     topics = chapter.topic_set.order_by('id')
-    context = {'chapter': chapter, 'topics':topics}
+    context = {'chapter': chapter, 'topics':topics, 'book': book}
     return render(request, 'book/chapter.html', context)
 
 def topic(request, topic_id):
     '''讨论话题的全部内容'''
     topic = Topic.objects.get(id=topic_id)
+    chapter = topic.chapter
     entries = topic.entry_set.order_by('id')
-    context = {'topic': topic, 'entries':entries}
+    context = {'topic': topic, 'entries': entries, 'chapter': chapter}
     return render(request, 'book/topic.html', context)

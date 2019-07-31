@@ -7,6 +7,7 @@
 <body>
     {% extends "book/base.html" %}
     {% block content %}
+    <p><a href="{% url 'book:chapter' chapter.id %}">回到本章</a></p>
     <p>
         Topic: {{ topic.topic }}
     </p>
