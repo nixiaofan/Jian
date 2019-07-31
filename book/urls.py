@@ -9,5 +9,5 @@ urlpatterns = [
     #显示特定书目
     url(r'^books/(?P<book_id>\d+)/$', v.book, name='book'),
     #显示特定的章节以及里面的部分答复
-    url(r'^books/(?P<book_id>\d+)/$', v.book, name='book'),
+    url(r'^chapter/(?P<chapter_id>\d+)/$', v.chapter, name='chapter'),
 ]

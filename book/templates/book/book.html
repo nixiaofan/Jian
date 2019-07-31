@@ -12,7 +12,9 @@
     </p>
     <ul>
     {% for chapter in chapters %}
-        <li>{{ chapter.name }}</li>
+        <li>
+            <a href="{% url 'book:chapter' chapter.id %}">{{ chapter.name }}</a>
+        </li>
     {% empty %}
         <li>暂时没有章节</li>
     {% endfor %}

@@ -11,10 +11,10 @@
         Chapter: {{ chapter.name }}
     </p>
     <ul>
-    {% for chapter in chapters %}
-        <li>{{ chapter.name }}</li>
+    {% for topic in topics %}
+        <li>{{ topic.topic }}</li>
     {% empty %}
-        <li>暂时没有章节</li>
+        <li>暂时没有内容</li>
     {% endfor %}
     </ul>
     {% endblock content%}
