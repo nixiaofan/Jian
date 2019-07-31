@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>book</title>
+</head>
+<body>
+    {% extends "book/base.html" %}
+    {% block content %}
+    <p>
+        Book: {{ book.name }}
+    </p>
+    <ul>
+    {% for chapter in chapters %}
+        <li>{{ chapter.name }}</li>
+    {% empty %}
+        <li>暂时没有章节</li>
+    {% endfor %}
+    </ul>
+    {% endblock content%}
+</body>
+</html>
