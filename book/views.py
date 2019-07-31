@@ -23,3 +23,10 @@ def chapter(request, chapter_id):
     topics = chapter.topic_set.order_by('id')
     context = {'chapter': chapter, 'topics':topics}
     return render(request, 'book/chapter.html', context)
+
+def topic(request, topic_id):
+    '''讨论话题的全部内容'''
+    topic = Topic.objects.get(id=topic_id)
+    entries = topic.entry_set.order_by('id')
+    context = {'topic': topic, 'entries':entries}
+    return render(request, 'book/topic.html', context)

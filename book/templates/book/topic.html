@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>chapter</title>
+    <title>entry</title>
 </head>
 <body>
     {% extends "book/base.html" %}
     {% block content %}
     <p>
-        Chapter: {{ chapter.name }}
+        Topic: {{ topic.topic }}
     </p>
     <ul>
-    {% for topic in topics %}
-        <li>
-            <a href="{% url 'book:topic' topic.id %}">{{ topic.topic }}</a>
-        </li>
+    {% for entry in entries %}
+        <li>{{ entry.entry }}</li>
     {% empty %}
         <li>暂时没有内容</li>
     {% endfor %}
