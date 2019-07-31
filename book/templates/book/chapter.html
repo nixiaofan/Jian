@@ -19,7 +19,9 @@
     {% empty %}
         <li>暂时没有内容</li>
     {% endfor %}
+
     </ul>
+    <a href="{% url 'book:new_topic' chapter.id%}">提问/感想</a>
     {% endblock content%}
 </body>
 </html>

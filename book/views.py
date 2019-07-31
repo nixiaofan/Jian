@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from .models import *
+from django.http import HttpResponseRedirect
+#从核心-解析器导入反向解析
+from django.core.urlresolvers import reverse
+from .forms import TopicForm
+
 # Create your views here.
 def index(request):
     return render(request, 'book/index.html')
@@ -32,3 +37,27 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('id')
     context = {'topic': topic, 'entries': entries, 'chapter': chapter}
     return render(request, 'book/topic.html', context)
+
+def new_topic(request, chapter_id):
+    '''在指定章节下面生成新的话题'''
+    #指定章节
+    chapter = Chapter.objects.get(id=chapter_id)
+
+    if request.method != 'POST':
+        #没有提交数据，创建一个新的表单
+        form = TopicForm()
+    else:
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            #新问题保存在new_topic中，而不保存在数据库中
+            new_topic = form.save(commit=False)
+            #指定多对一属性
+            new_topic.chapter = chapter
+            #然后再保存
+            new_topic.save()
+
+            #重定向到章节的所有的问题页面
+            return HttpResponseRedirect(reverse('book:chapter', args=[chapter_id]))
+
+    context = {'form': form, 'chapter': chapter}
+    return render(request, 'book/new_topic.html', context)

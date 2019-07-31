@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new_topic</title>
+</head>
+<body>
+{% extends "book/base.html" %}
+{% block content %}
+    <p>
+        <a href="{% url 'book:chapter' chapter.id %}">回到本章</a>
+    </p>
+    <p>提问/感想：</p>
+    <form action="{% url 'book:new_topic' chapter.id%}" method="post">
+        {% csrf_token %}
+        {#以段落方式渲染#}
+        {{ form.as_p }}
+        <button name="submit">提交</button>
+    </form>
+{% endblock content %}
+</body>
+</html>
